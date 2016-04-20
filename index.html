@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/superhero/bootstrap.css"></link>
+<title>Healt Patient Status</title>
+<div class="container" ng-app="healthApp">
+  <h1 class="text-center">Healt Patient Status</h1>
+  <div class="row" ng-controller="PatientsController">
+    <div class="form-group">
+      <label class="col-md-1 control-label">Filter</label>
+      <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="search" ng-model="search">
+      </div>
+    </div>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th><a ng-click="sortBy('id')" class="btn"><i class="glyphicon glyphicon-menu-right"></i> Id</a></td>
+          <th><a ng-click="sortBy('fname')" class="btn"><i class="glyphicon glyphicon-menu-right"></i> Fisrt name</a></td>
+          <th><a ng-click="sortBy('lname')" class="btn"><i class="glyphicon glyphicon-menu-right"></i> Last name</a></td>
+          <th><a ng-click="sortBy('status')" class="btn"><i class="glyphicon glyphicon-menu-right"></i> Status</a></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="patient in patients | filter: search | orderBy: sort : inverse" ng-show="patients.length">
+          <td ng-bind="patient.id"></td>
+          <td ng-bind="patient.fname"></td>
+          <td ng-bind="patient.lname"></td>
+          <td ng-bind="getStatus(patient.id)"></td>
+        </tr>
+        <tr ng-show="!patients.length">
+          <td colspan="4" class="text-center">No data</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="app.js"></script>
